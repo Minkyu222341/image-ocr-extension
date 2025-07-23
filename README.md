@@ -1,79 +1,54 @@
-# 🔍 이미지 텍스트 추출기 (Image Text Extractor)
-
+# 이미지 텍스트 추출기 (Image Text Extractor)
 이미지에서 텍스트를 추출하고 클립보드에 자동으로 복사해주는 Chrome 확장 프로그램입니다.
 
-## ✨ 주요 기능
+<br><br>
 
-- **다국어 지원**: 한국어, 영어, 일본어, 중국어
-- **드래그 앤 드롭**: 간편한 이미지 업로드
-- **실시간 진행률**: OCR 처리 과정 시각화
-- **자동 클립보드 복사**: 추출된 텍스트 자동 복사
-- **다양한 형식 지원**: JPG, PNG, GIF, BMP
+## 주요 기능
 
-## 🚀 사용법
+- 이미지 드래그 앤 드롭으로 간편한 업로드
+- 텍스트 자동 추출 및 클립보드 복사
+- 태그 및 클래스 입력 시 마크업으로 감싸서 복사  
+  예: `<p class="hid">텍스트</p>` 형태로 추출
+- 다국어 OCR 지원 (한국어, 영어, 일본어, 중국어 등)
+- OCR 진행률 시각화 제공
+- JPG, PNG, GIF, BMP 등 다양한 이미지 포맷 지원
+
+<br><br>
+
+## 사용법
 
 1. Chrome 확장 프로그램 아이콘 클릭
-2. 이미지를 드래그 앤 드롭 또는 파일 선택
-3. 언어 선택 후 "텍스트 추출 시작" 클릭
-4. 추출된 텍스트가 자동으로 클립보드에 복사됩니다!
+2. 이미지 업로드  
+   - 드래그 앤 드롭 또는  
+   - “파일 선택” 버튼 클릭
+3. 언어 선택 (예: 한국어 + 영어)
+4. (선택) 태그 및 클래스 입력  
+   예: `태그: p`, `클래스: hid`
+5. "텍스트 추출 시작" 클릭
+6. 추출된 텍스트가 자동으로 클립보드에 복사됨
 
-## 📱 활용 예시
+<br><br>
 
-- 웹페이지 스크린샷에서 텍스트 추출
-- 사진 속 간판이나 표지판 텍스트 인식
-- 문서나 책 사진에서 텍스트 복사
-- 외국어 이미지 텍스트 번역을 위한 전처리
+## 활용 예시
 
-## 🛠️ 기술 스택
+| 이미지 업로드 전 | 이미지 업로드 후 |
+|------------------|------------------|
+| <img width="397" height="597" alt="image" src="https://github.com/user-attachments/assets/b19290a8-a34e-436e-bffb-cdde9b170b37" /> | <img width="394" height="599" alt="image" src="https://github.com/user-attachments/assets/417bd9b0-a5bb-4626-8aaf-51309f056eb9" /> |
 
-- **Frontend**: HTML, CSS, JavaScript
-- **OCR API**: OCR.space API
-- **Platform**: Chrome Extension Manifest V3
+※ 이미지를 저장하지 않고 그대로 드래그해서 사용해보세요
 
-## 📦 설치 방법
+<br><br>
+
+## 설치 방법
 
 ### Chrome 웹 스토어에서 설치 (권장)
+
 1. [Chrome 웹 스토어](https://chrome.google.com/webstore) 접속
-2. "이미지 텍스트 추출기" 검색
-3. "Chrome에 추가" 클릭
+2. “이미지 텍스트 추출기” 검색
+3. “Chrome에 추가” 클릭
 
-### 개발자 모드로 설치
-1. 이 저장소를 클론하거나 다운로드
-2. Chrome에서 `chrome://extensions/` 접속
-3. "개발자 모드" 활성화
-4. "압축해제된 확장 프로그램을 로드합니다" 클릭
-5. 프로젝트 폴더 선택
 
-## 🔧 개발 환경 설정
 
-```bash
-# 저장소 클론
-git clone https://github.com/[YOUR_USERNAME]/image-ocr-extension.git
+## 라이선스
 
-# 프로젝트 디렉토리로 이동
-cd image-ocr-extension
-
-# Chrome에서 개발자 모드로 로드
-# chrome://extensions/ → 개발자 모드 ON → 압축해제된 확장 프로그램 로드
-```
-
-## 📁 프로젝트 구조
-
-```
-image-ocr-extension/
-├── manifest.json          # 확장 프로그램 설정
-├── popup.html            # 팝업 UI
-├── popup.js              # 메인 로직
-├── icon16.png            # 16x16 아이콘
-├── icon48.png            # 48x48 아이콘
-├── icon128.png           # 128x128 아이콘
-├── privacy_policy.md     # 개인정보 처리방침
-├── README.md             # 프로젝트 설명
-└── .gitignore           # Git 무시 파일
-```
-
-## 📝 라이선스
-
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
-
-⭐ 이 프로젝트가 유용하다면 스타를 눌러주세요!
+이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참고하세요.
