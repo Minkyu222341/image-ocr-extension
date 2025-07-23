@@ -33,11 +33,13 @@
 ## 📦 설치 방법
 
 ### Chrome 웹 스토어에서 설치 (권장)
+
 1. [Chrome 웹 스토어](https://chrome.google.com/webstore) 접속
 2. "이미지 텍스트 추출기" 검색
 3. "Chrome에 추가" 클릭
 
 ### 개발자 모드로 설치
+
 1. 이 저장소를 클론하거나 다운로드
 2. Chrome에서 `chrome://extensions/` 접속
 3. "개발자 모드" 활성화

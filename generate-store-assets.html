@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chrome 웹 스토어 이미지 자동 생성</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #333; 
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .status {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        canvas { 
+            border: 1px solid #ddd; 
+            margin: 10px; 
+            border-radius: 8px;
+        }
+        .download-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        button { 
+            padding: 12px 24px; 
+            margin: 8px; 
+            background: #4285f4; 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 14px;
+            font-weight: 500;
+        }
+        button:hover { 
+            background: #3367d6; 
+        }
+        .info {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .file-info {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Chrome 웹 스토어 이미지 생성기</h1>
+        
+        <div class="info">
+            <strong>📋 생성될 이미지들:</strong><br>
+            • 스토어 아이콘 (128x128) - Chrome 웹 스토어에서 표시될 아이콘<br>
+            • 스크린샷 (1280x800) - 확장 프로그램 소개 이미지<br>
+            • 프로모션 이미지 (440x280) - 추천 섹션에 표시될 이미지
+        </div>
+
+        <div class="status" id="status">
+            이미지 생성 준비 중...
+        </div>
+        
+        <div style="text-align: center;">
+            <div class="file-info">
+                <canvas id="storeIcon" width="128" height="128"></canvas><br>
+                <strong>스토어 아이콘</strong><br>
+                <small>128x128</small>
+            </div>
+            
+            <div class="file-info">
+                <canvas id="screenshot" width="640" height="400"></canvas><br>
+                <strong>스크린샷</strong><br>
+                <small>1280x800 (미리보기: 640x400)</small>
+            </div>
+            
+            <div class="file-info">
+                <canvas id="promo" width="440" height="280"></canvas><br>
+                <strong>프로모션 이미지</strong><br>
+                <small>440x280</small>
+            </div>
+        </div>
+        
+        <div class="download-section">
+            <h3>📥 다운로드</h3>
+            <button onclick="downloadAll()">모든 이미지 다운로드</button>
+            <button onclick="downloadCanvas('storeIcon', 'store_icon_128.png')">스토어 아이콘</button>
+            <button onclick="downloadCanvas('screenshot', 'screenshot_1280x800.png')">스크린샷</button>
+            <button onclick="downloadCanvas('promo', 'promo_440x280.png')">프로모션 이미지</button>
+        </div>
+    </div>
+    
+    <script>
+        // 스토어 아이콘 생성 (128x128)
+        function createStoreIcon() {
+            const canvas = document.getElementById('storeIcon');
+            const ctx = canvas.getContext('2d');
+            
+            // 그라디언트 배경
+            const gradient = ctx.createLinearGradient(0, 0, 128, 128);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 128, 128);
+            
+            // 둥근 모서리
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, 128, 128, 20);
+            ctx.fill();
+            ctx.globalCompositeOperation = 'source-over';
+            
+            // 돋보기 아이콘
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 8;
+            ctx.beginPath();
+            ctx.arc(45, 45, 20, 0, 2 * Math.PI);
+            ctx.stroke();
+            
+            // 돋보기 손잡이
+            ctx.beginPath();
+            ctx.moveTo(60, 60);
+            ctx.lineTo(80, 80);
+            ctx.stroke();
+            
+            // 텍스트 'OCR'
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('OCR', 64, 110);
+        }
+        
+        // 스크린샷 생성 (1280x800, 미리보기는 640x400)
+        function createScreenshot() {
+            const canvas = document.getElementById('screenshot');
+            const ctx = canvas.getContext('2d');
+            
+            // 배경
+            ctx.fillStyle = '#f5f5f5';
+            ctx.fillRect(0, 0, 640, 400);
+            
+            // 확장 프로그램 창 시뮬레이션
+            ctx.fillStyle = 'white';
+            ctx.fillRect(50, 50, 380, 300);
+            ctx.strokeStyle = '#ddd';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(50, 50, 380, 300);
+            
+            // 헤더
+            const headerGradient = ctx.createLinearGradient(50, 50, 430, 80);
+            headerGradient.addColorStop(0, '#2c3e50');
+            headerGradient.addColorStop(1, '#34495e');
+            ctx.fillStyle = headerGradient;
+            ctx.fillRect(50, 50, 380, 40);
+            
+            // 제목
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🔍 이미지 텍스트 추출기', 240, 75);
+            
+            // 웹 접근성 섹션
+            ctx.fillStyle = '#f8f9ff';
+            ctx.fillRect(70, 100, 340, 60);
+            ctx.strokeStyle = '#e0e6ff';
+            ctx.strokeRect(70, 100, 340, 60);
+            
+            ctx.fillStyle = '#555';
+            ctx.font = '11px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('웹 접근성 태그:', 80, 120);
+            ctx.fillText('태그: p    클래스: hid', 80, 140);
+            ctx.fillStyle = '#667eea';
+            ctx.fillText('미리보기: <p class="hid">추출된 텍스트</p>', 80, 155);
+            
+            // 업로드 영역
+            ctx.strokeStyle = '#667eea';
+            ctx.setLineDash([5, 5]);
+            ctx.strokeRect(70, 170, 340, 80);
+            ctx.setLineDash([]);
+            
+            ctx.fillStyle = '#667eea';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('이미지를 드래그하거나 클릭하여 업로드', 240, 215);
+            
+            // 버튼
+            ctx.fillStyle = '#667eea';
+            ctx.fillRect(170, 260, 140, 30);
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 12px Arial';
+            ctx.fillText('🔍 텍스트 추출 시작', 240, 280);
+            
+            // 결과 영역
+            ctx.fillStyle = '#f8f9fa';
+            ctx.fillRect(70, 300, 340, 40);
+            ctx.strokeStyle = '#e9ecef';
+            ctx.strokeRect(70, 300, 340, 40);
+            
+            ctx.fillStyle = '#333';
+            ctx.font = '11px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('추출된 텍스트: <p class="hid">Hello World 안녕하세요</p>', 80, 325);
+        }
+        
+        // 프로모션 이미지 생성 (440x280)
+        function createPromoImage() {
+            const canvas = document.getElementById('promo');
+            const ctx = canvas.getContext('2d');
+            
+            // 배경 그라디언트
+            const gradient = ctx.createLinearGradient(0, 0, 440, 280);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 440, 280);
+            
+            // 제목
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 28px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('이미지 텍스트 추출기', 220, 60);
+            
+            // 부제목
+            ctx.font = '16px Arial';
+            ctx.fillText('웹 접근성을 위한 OCR 도구', 220, 90);
+            
+            // 기능 설명
+            ctx.font = '13px Arial';
+            ctx.fillText('✓ 다국어 지원 (한국어, 영어, 일본어, 중국어)', 220, 130);
+            ctx.fillText('✓ 웹 접근성 태그 자동 래핑', 220, 150);
+            ctx.fillText('✓ 드래그 앤 드롭 지원', 220, 170);
+            ctx.fillText('✓ 자동 클립보드 복사', 220, 190);
+            ctx.fillText('✓ 시각장애인 지원', 220, 210);
+            
+            // 하단 텍스트
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText('포용적인 웹 환경을 만들어가세요', 220, 250);
+        }
+        
+        function downloadCanvas(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            
+            // 스크린샷의 경우 실제 크기로 다시 그리기
+            if (canvasId === 'screenshot') {
+                const fullCanvas = document.createElement('canvas');
+                fullCanvas.width = 1280;
+                fullCanvas.height = 800;
+                const fullCtx = fullCanvas.getContext('2d');
+                
+                // 2배 스케일로 다시 그리기
+                fullCtx.scale(2, 2);
+                createScreenshot();
+                fullCtx.drawImage(canvas, 0, 0);
+                
+                fullCanvas.toBlob(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+                return;
+            }
+            
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        }
+        
+        function downloadAll() {
+            setTimeout(() => downloadCanvas('storeIcon', 'store_icon_128.png'), 100);
+            setTimeout(() => downloadCanvas('screenshot', 'screenshot_1280x800.png'), 300);
+            setTimeout(() => downloadCanvas('promo', 'promo_440x280.png'), 500);
+            
+            document.getElementById('status').innerHTML = '✅ 모든 이미지가 다운로드되었습니다!';
+        }
+        
+        // 페이지 로드 시 모든 이미지 생성
+        window.onload = () => {
+            createStoreIcon();
+            createScreenshot();
+            createPromoImage();
+            document.getElementById('status').innerHTML = '✅ 이미지 생성 완료! 다운로드 버튼을 클릭하세요.';
+        };
+    </script>
+</body>
+</html>
