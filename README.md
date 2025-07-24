@@ -50,6 +50,23 @@
 
 <br><br>
 
+## 📁 프로젝트 구조
+
+```
+image-ocr-extension/
+├── src/                    # 소스 코드
+│   ├── manifest.json       # 확장 프로그램 설정
+│   ├── popup.html          # UI
+│   ├── popup.js            # 메인 로직
+│   └── icons/              # 확장 프로그램 아이콘
+├── dist/                   # 빌드 결과물
+├── assets/                 # 스토어 이미지
+├── tools/                  # 개발 도구
+├── docs/                   # 문서
+```
+
+<br><br>
+
 ## 라이선스
 
 이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참고하세요.
