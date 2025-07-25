@@ -1,19 +1,21 @@
 # Chrome Extension Build Script
-# 배포용 패키지를 dist 폴더에 생성
-
 Write-Host "🚀 Chrome Extension 빌드 시작..." -ForegroundColor Green
 
-# dist 폴더 정리
+# dist 폴더 정리 및 생성
 if (Test-Path "dist") {
-    Remove-Item "dist\*" -Recurse -Force
-    Write-Host "✅ dist 폴더 정리 완료" -ForegroundColor Yellow
+    Remove-Item "dist" -Recurse -Force
 }
+New-Item -ItemType Directory -Path "dist" -Force | Out-Null
 
 # 필수 파일들을 dist로 복사
-Copy-Item "src\manifest.json" "dist\"
-Copy-Item "src\popup.html" "dist\"
-Copy-Item "src\popup.js" "dist\"
-Copy-Item "src\icons\*" "dist\"
+Copy-Item "src\manifest.json" "dist\manifest.json"
+Copy-Item "src\popup.html" "dist\popup.html"
+Copy-Item "src\popup.js" "dist\popup.js"
+
+# 아이콘 파일들 복사
+Copy-Item "src\icons\icon16.png" "dist\icon16.png"
+Copy-Item "src\icons\icon48.png" "dist\icon48.png"
+Copy-Item "src\icons\icon128.png" "dist\icon128.png"
 
 Write-Host "✅ 소스 파일 복사 완료" -ForegroundColor Yellow
 
