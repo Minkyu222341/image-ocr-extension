@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "이미지 텍스트 추출기",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "이미지에서 텍스트를 추출하고 클립보드에 자동으로 복사해주는 확장 프로그램",
-  "permissions": ["clipboardWrite", "storage", "activeTab"],
+  "permissions": ["clipboardWrite", "storage"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
