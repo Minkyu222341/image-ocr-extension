@@ -1,21 +1,21 @@
 {
   "manifest_version": 3,
   "name": "이미지 텍스트 추출기",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "이미지에서 텍스트를 추출하고 클립보드에 자동으로 복사해주는 확장 프로그램",
   "permissions": ["clipboardWrite", "storage"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
     }
   },
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
   },
 
   "content_security_policy": {
